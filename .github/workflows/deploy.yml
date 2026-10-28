@@ -1,0 +1,51 @@
+name: Build and publish blog
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: blog-release
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Check
+        run: npm run check
+
+      - name: Build
+        run: npm run build
+
+      - name: Check links
+        run: npm run check-links
+
+      - name: Package
+        run: |
+          tar -czf site.tar.gz -C dist .
+          echo "$GITHUB_SHA" > sha.txt
+
+      - name: Publish release assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release view deploy >/dev/null 2>&1 || \
+            gh release create deploy --title "Deploy" --notes "Automated artifact for Alpine pull deploy."
+          gh release upload deploy site.tar.gz sha.txt --clobber
