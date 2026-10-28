@@ -1,4 +1,5 @@
 (() => {
+  document.documentElement.classList.add("js");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const canvas = document.getElementById("rain");

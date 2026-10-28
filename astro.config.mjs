@@ -8,6 +8,11 @@ export default defineConfig({
   build: {
     format: "file",
   },
+  vite: {
+    build: {
+      assetsInlineLimit: 0,
+    },
+  },
   integrations: [
     sitemap({
       serialize(item) {

@@ -762,8 +762,8 @@ blockquote {
 .credit a { color: var(--muted); border-bottom: 1px solid var(--line); }
 .credit a:hover { color: var(--cyan); }
 
-.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
-.reveal.in { opacity: 1; transform: none; }
+.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.js .reveal.in { opacity: 1; transform: none; }
 
 @media (max-width: 940px) {
   .hero { grid-template-columns: 1fr; padding-top: 54px; }
@@ -789,7 +789,7 @@ blockquote {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
-  .reveal { opacity: 1; transform: none; }
+  .js .reveal { opacity: 1; transform: none; }
 }
 
 
