@@ -1,0 +1,132 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostRow from "../components/PostRow.astro";
+import { getPosts, formatDate, tagCounts, tagId } from "../utils/posts";
+
+const posts = await getPosts();
+const tags = tagCounts(posts).slice(0, 10);
+const lastSync = posts[0] ? formatDate(posts[0].data.pubDate) : "2026.10.28";
+---
+
+<BaseLayout
+  title="监视者日志 · OVERSEER.LOG"
+  description="记录两台小服务器、一条隧道和无数次重启。一个关于 Homelab、网络、容器与自托管的个人技术博客。"
+  active="home"
+  status="LINK STABLE"
+>
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="kicker">// HOMELAB NOTES FROM THE RAIN</p>
+        <h1>监视者<br /><span class="glow">日志</span><span class="cursor">_</span></h1>
+        <p class="lead">记录两台小服务器、一条隧道和无数次重启。这里没有教程的终点，只有还在运行的服务。</p>
+        <div class="hero-meta">
+          <span>EST. 2026</span>
+          <span>{String(posts.length).padStart(2, "0")} 篇文章</span>
+          <span>最后同步 {lastSync}</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn primary" href="/archive.html">读取归档 →</a>
+          <a class="btn" href="/about.html">关于这个节点</a>
+        </div>
+      </div>
+
+      <div class="hero-eye">
+        <div class="holo-frame">
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+          <svg class="overseer" viewBox="0 0 240 240" role="img" aria-label="一只像素风格的监视者眼睛">
+            <defs>
+              <radialGradient id="lens" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#0d2426"></stop>
+                <stop offset="70%" stop-color="#071012"></stop>
+                <stop offset="100%" stop-color="#04090a"></stop>
+              </radialGradient>
+              <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+                <feGaussianBlur stdDeviation="5" result="b"></feGaussianBlur>
+                <feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="b"></feMergeNode></feMerge>
+              </filter>
+            </defs>
+            <g fill="none" stroke="currentColor" opacity="0.38">
+              <circle cx="120" cy="120" r="106" stroke-dasharray="2 9"></circle>
+              <circle cx="120" cy="120" r="88" stroke-dasharray="20 8" stroke-width="1.4"></circle>
+            </g>
+            <g fill="none" stroke="currentColor" stroke-width="2" opacity="0.55">
+              <path d="M42 72 C14 82, 24 112, 8 126"></path>
+              <path d="M198 78 C224 88, 216 116, 232 130"></path>
+              <path d="M120 14 C120 4, 126 -2, 130 -8"></path>
+              <path d="M120 226 C120 236, 114 242, 110 248"></path>
+            </g>
+            <circle cx="120" cy="120" r="60" fill="url(#lens)" stroke="#4fe3d4" stroke-width="2"></circle>
+            <circle cx="120" cy="120" r="47" fill="none" stroke="#e8c56a" stroke-width="3" stroke-dasharray="5 7" class="ring"></circle>
+            <g id="pupil">
+              <circle cx="120" cy="120" r="22" fill="#4fe3d4" opacity="0.22" filter="url(#glow)"></circle>
+              <circle cx="120" cy="120" r="13" fill="#e8c56a"></circle>
+              <rect x="116" y="99" width="8" height="42" rx="1" fill="#071012" opacity="0.82"></rect>
+              <circle cx="115" cy="114" r="2.5" fill="#f6ffe9"></circle>
+            </g>
+            <g fill="#4fe3d4" opacity="0.8">
+              <rect x="63" y="117" width="4" height="6"></rect>
+              <rect x="173" y="117" width="4" height="6"></rect>
+              <rect x="118" y="57" width="4" height="4"></rect>
+              <rect x="118" y="179" width="4" height="4"></rect>
+            </g>
+          </svg>
+        </div>
+        <div class="eye-caption"><span class="dot"></span>OVERSEER / 观察中</div>
+      </div>
+    </section>
+
+    <section class="console" aria-label="系统状态摘要">
+      <div class="console-head"><span>!</span>SYSTEM FEED</div>
+      <div class="console-body">
+        <div class="line"><span class="prompt">root@alpine:~#</span> rc-service cloudflared status</div>
+        <div class="line">&gt; cloudflared: <em>started</em> · demo tunnel · 4 connections</div>
+        <div class="line">&gt; nginx 8443 <b>[ OK ]</b> · edgeone origin <b>[ OK ]</b> · crond <b>[ OK ]</b></div>
+        <div class="line"><span class="prompt">root@alpine:~#</span> echo "posts are still alive"<span class="cursor">_</span></div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <section id="archive" class="feed">
+        <div class="section-head">
+          <h2>最近的记录</h2>
+          <span>NEWEST FIRST</span>
+        </div>
+        <ol class="posts">
+          {posts.map((post, index) => <PostRow post={post} index={index} />)}
+        </ol>
+        <a class="more" href="/archive.html">[ 读取更多记录 ]</a>
+      </section>
+
+      <aside class="side">
+        <section id="tags" class="panel">
+          <h4>标签索引 / TAGS</h4>
+          <div class="tagcloud">
+            {tags.map((tag) => (
+              <a href={`/tags.html#${tagId(tag.name)}`}>{tag.name}</a>
+            ))}
+          </div>
+        </section>
+
+        <section class="panel">
+          <h4>节点状态 / NODES</h4>
+          <ul class="nodes">
+            <li><span class="dot ok"></span>blog.zycbhb.top <b>UP</b></li>
+            <li><span class="dot ok"></span>edgeone / origin <b>UP</b></li>
+            <li><span class="dot ok"></span>cloudflared <b>UP</b></li>
+            <li><span class="dot ok"></span>nginx:8443 <b>UP</b></li>
+            <li><span class="dot warn"></span>uptime-kuma <b>LAN</b></li>
+          </ul>
+          <p class="panel-note">状态来自内网监控快照，仅作展示。真正的面板只在 SSH 隧道里可见。</p>
+        </section>
+
+        <section id="about" class="panel about">
+          <h4>关于 / ABOUT</h4>
+          <p>一个放在 Alpine 小机器上的 Homelab 记录站。关于网络、容器、监控，以及把旧硬件用到极限的执念。</p>
+          <p class="sign">— 守望者 / 2026 · <a href="/about.html">更多</a></p>
+        </section>
+      </aside>
+    </div>
+  </main>
+</BaseLayout>

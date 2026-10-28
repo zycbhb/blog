@@ -1,0 +1,24 @@
+---
+interface Props {
+  active?: "home" | "archive" | "tags" | "about";
+  status?: string;
+}
+
+const { active = "home", status = "LINK STABLE" } = Astro.props;
+const nav = [
+  { key: "home", href: "/", label: "/ 首页" },
+  { key: "archive", href: "/archive.html", label: "/ 归档" },
+  { key: "tags", href: "/tags.html", label: "/ 标签" },
+  { key: "about", href: "/about.html", label: "/ 关于" },
+] as const;
+---
+
+<header class="topbar">
+  <a class="brand" href="/"><span class="eye-mini" aria-hidden="true"></span>OVERSEER<span class="dim">.LOG</span></a>
+  <nav>
+    {nav.map((item) => (
+      <a href={item.href} class={active === item.key ? "on" : undefined}>{item.label}</a>
+    ))}
+  </nav>
+  <div class="status"><span class="dot"></span>{status}</div>
+</header>

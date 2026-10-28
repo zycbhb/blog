@@ -1,0 +1,23 @@
+﻿---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="404 · 记录不存在 · 监视者日志"
+  description="这条信号没有抵达任何节点。"
+  status="SIGNAL LOST"
+  noindex={true}
+  footerRight='SIGNAL LOST · <a href="/">HOME</a>'
+>
+  <main class="page-wrap">
+    <section class="page-head">
+      <p class="kicker">// ERROR / 404</p>
+      <h1>记录不存在</h1>
+      <p class="lead">这条信号没有抵达任何节点。可能是链接写错了，也可能这篇文章已经被移走。</p>
+      <div class="meta"><span>404 NOT FOUND</span><span>BACK TO ARCHIVE</span></div>
+    </section>
+    <div class="page-body">
+      <p><a class="btn primary" href="/">返回首页 →</a> <a class="btn" href="/archive.html">查看归档</a></p>
+    </div>
+  </main>
+</BaseLayout>

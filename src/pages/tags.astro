@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getPosts, postsByTag, tagId, formatDate, postUrl } from "../utils/posts";
+
+const posts = await getPosts();
+const groups = postsByTag(posts);
+---
+
+<BaseLayout
+  title="标签 · 监视者日志"
+  description="监视者日志的标签索引。"
+  active="tags"
+  status="TAG INDEX"
+>
+  <main class="page-wrap">
+    <section class="page-head">
+      <p class="kicker">// TAG INDEX / 2026</p>
+      <h1>标签索引</h1>
+      <p class="lead">按主题浏览记录。标签会随着文章增加，当前共 {String(posts.length).padStart(2, "0")} 篇文章、{groups.length} 个标签。</p>
+      <div class="meta"><span>{groups.length} 个标签</span><span>按名称排序</span></div>
+    </section>
+
+    <div class="tag-grid">
+      {groups.map((group) => (
+        <section id={tagId(group.tag)} class="tag-block">
+          <h2>{group.tag} <span>/ {String(group.posts.length).padStart(2, "0")}</span></h2>
+          <ul>
+            {group.posts.map((post) => (
+              <li>
+                <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+                <a href={postUrl(post)}>{post.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+
+    <a class="more" href="/archive.html">[ 回到归档 ]</a>
+  </main>
+</BaseLayout>

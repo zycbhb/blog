@@ -1,0 +1,35 @@
+---
+import { render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostLayout from "../../layouts/PostLayout.astro";
+import { getPosts, postSlug, type Post } from "../../utils/posts";
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post: Post, index: number) => ({
+    params: { slug: postSlug(post) },
+    props: {
+      post,
+      prev: posts[index + 1] ?? null,
+      next: posts[index - 1] ?? null,
+    },
+  }));
+}
+
+const { post, prev, next } = Astro.props;
+const { Content } = await render(post);
+const recordNo = post.id.slice(0, 3);
+---
+
+<BaseLayout
+  title={`${post.data.title} · 监视者日志`}
+  description={post.data.description}
+  status="READING MODE"
+  showProgress={true}
+  ogType="article"
+  footerRight={`END OF RECORD · ${recordNo} / <a href="/archive.html">ARCHIVE</a>`}
+>
+  <PostLayout post={post} prev={prev} next={next}>
+    <Content />
+  </PostLayout>
+</BaseLayout>

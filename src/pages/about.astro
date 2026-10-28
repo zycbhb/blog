@@ -1,0 +1,106 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="关于 · 监视者日志"
+  description="关于监视者日志：一个 Homelab 技术博客。"
+  active="about"
+  status="NODE ONLINE"
+>
+  <main class="page-wrap">
+    <section class="page-head">
+      <p class="kicker">// ABOUT THIS NODE / 2026</p>
+      <h1>关于这个节点</h1>
+      <p class="lead">一台 2GB 的 Alpine、一条 Cloudflare Tunnel、一个 EdgeOne 双栈入口，以及一个总在凌晨检查日志的人。</p>
+      <div class="meta"><span>EST. 2026</span><span>STATIC BLOG</span><span>NO TRACKING</span></div>
+    </section>
+
+    <div class="about-page">
+      <article class="prose">
+        <h2>这是谁写的</h2>
+        <p>
+          这里是一个人的 Homelab 记录站。主业不是运维，但总忍不住把旧笔记本、域名、证书和小型服务器
+          拼在一起，看看它们能跑多远。博客里的很多东西都不是最优解，只是在我这里刚好能用的解。
+        </p>
+
+        <h2>为什么写下来</h2>
+        <p>
+          因为服务器会重启，隧道会掉线，IPv6 前缀会变。很多问题第一次解决时花了整个晚上，
+          第二次遇到时却只记得「好像改过某个配置」。写下来，是为了下一次少走一点夜路。
+        </p>
+        <p>如果这些记录刚好也帮到了你，那这个站点就多了一点意义。</p>
+
+        <h2>站点怎么跑</h2>
+        <ul>
+          <li>一台 Alpine 小机器，负责 nginx 和静态文件；</li>
+          <li>EdgeOne 免费版做双栈入口，回源到 <code>origin.zycbhb.top:8443</code> 的 IPv6；</li>
+          <li>Cloudflare Tunnel 保留给旧展示页和回滚路径；</li>
+          <li>纯静态 HTML / CSS / JS，没有数据库，也没有后台；</li>
+          <li>字体自托管，页面不加载第三方分析工具。</li>
+        </ul>
+        <p>
+          这条链路的好处是简单：没有数据库要备份，没有后台要升级，文章就是文件。
+          坏处也同样明显：每加一篇文章，都要改一次源码——这个站点正在迁移到 Astro + Git 的工作流。
+        </p>
+
+        <h2>写什么</h2>
+        <p>
+          主要写 Homelab、自托管、网络和监控：Cloudflare Tunnel、动态 IPv6、Alpine 上的服务编排、
+          Uptime Kuma、EasyTier，以及那些「本来只想改一行配置」最后变成通宵的夜晚。
+        </p>
+        <p>偶尔也会写一点硬件和旧设备改造。毕竟很多问题的起点，是一台本来该被淘汰的机器。</p>
+
+        <h2>隐私</h2>
+        <p>
+          这个站点不设置 Cookie，不接入访问分析，不加载第三方评论或广告。
+          服务器日志只保留排障所需的最少信息，不会用来追踪读者。
+        </p>
+
+        <h2>字体</h2>
+        <p class="credit">
+          站点使用 <strong>Fusion Pixel Font</strong>（缝合像素字体），以 SIL Open Font License 1.1 授权。
+          字体文件与许可证随站点一起自托管，可在
+          <a href="/assets/fonts/OFL.txt">assets/fonts/OFL.txt</a> 查看全文。
+        </p>
+
+        <div class="callout">
+          <b>关于内容 / NOTE</b><br />
+          这里是刚上线的第一版。文章会继续增加，栏目和样式也可能调整。
+          如果你发现链接或排版有问题，欢迎之后通过站点留下的联系方式告诉我。
+        </div>
+      </article>
+
+      <aside class="about-side">
+        <section class="panel">
+          <h4>节点状态 / NODES</h4>
+          <ul class="nodes">
+            <li><span class="dot ok"></span>blog.zycbhb.top <b>UP</b></li>
+            <li><span class="dot ok"></span>edgeone / origin <b>UP</b></li>
+            <li><span class="dot ok"></span>nginx:8443 <b>UP</b></li>
+            <li><span class="dot ok"></span>static blog <b>UP</b></li>
+            <li><span class="dot warn"></span>uptime-kuma <b>LAN</b></li>
+          </ul>
+          <p class="panel-note">来自内网监控快照，仅作展示。</p>
+        </section>
+
+        <section class="panel">
+          <h4>技术栈 / STACK</h4>
+          <ul class="nodes">
+            <li>Astro / HTML / CSS <b>STATIC</b></li>
+            <li>nginx <b>ORIGIN</b></li>
+            <li>EdgeOne <b>EDGE</b></li>
+            <li>Alpine Linux <b>HOST</b></li>
+          </ul>
+        </section>
+
+        <section class="panel about">
+          <h4>更新记录 / LOG</h4>
+          <p>2026.10.28 · 站点迁到 EdgeOne 双栈，接入 Uptime Kuma。</p>
+          <p>2026.10.27 · 站点第一版上线，6 篇示例记录。</p>
+          <p class="sign">— 守望者 / 2026 年秋</p>
+        </section>
+      </aside>
+    </div>
+  </main>
+</BaseLayout>

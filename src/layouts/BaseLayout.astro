@@ -1,0 +1,60 @@
+﻿---
+import Topbar from "../components/Topbar.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  active?: "home" | "archive" | "tags" | "about";
+  status?: string;
+  showProgress?: boolean;
+  footerRight?: string;
+  ogType?: "website" | "article";
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = "监视者日志：一个关于 Homelab、网络、容器与自托管的个人技术博客。",
+  active,
+  status,
+  showProgress = false,
+  footerRight,
+  ogType = "website",
+  noindex = false,
+} = Astro.props;
+
+const canonicalPath = Astro.url.pathname.replace(/\/index\.html$/, "/");
+const canonical = new URL(canonicalPath, Astro.site ?? Astro.url);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="监视者日志" href="/rss.xml" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <canvas id="rain" aria-hidden="true"></canvas>
+    <div class="scanlines" aria-hidden="true"></div>
+    {showProgress && <div class="progress" id="progress"></div>}
+    <Topbar active={active} status={status} />
+    <slot />
+    <Footer right={footerRight} />
+    <script>
+      import "../scripts/main.js";
+    </script>
+  </body>
+</html>

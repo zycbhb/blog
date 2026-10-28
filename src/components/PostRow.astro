@@ -1,0 +1,27 @@
+---
+import type { Post } from "../utils/posts";
+import { formatDate, postUrl } from "../utils/posts";
+
+interface Props {
+  post: Post;
+  index: number;
+  summary?: boolean;
+}
+
+const { post, index, summary = true } = Astro.props;
+---
+
+<li class="reveal">
+  <a class="post" href={postUrl(post)}>
+    <span class="idx">{String(index + 1).padStart(3, "0")}</span>
+    <div class="post-main">
+      <div class="post-meta">
+        <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+        {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+      </div>
+      <h3>{post.data.title}</h3>
+      {summary && <p>{post.data.description}</p>}
+    </div>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+</li>

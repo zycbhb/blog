@@ -1,0 +1,12 @@
+---
+interface Props {
+  right?: string;
+}
+
+const { right = 'NGINX · STATIC · NO TRACKING · <a href="/archive.html">ARCHIVE</a>' } = Astro.props;
+---
+
+<footer>
+  <span>OVERSEER.LOG © 2026</span>
+  <span set:html={right} />
+</footer>
