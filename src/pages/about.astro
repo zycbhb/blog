@@ -12,31 +12,27 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <section class="page-head">
       <p class="kicker">// ABOUT THIS NODE / 2026</p>
       <h1>关于这个节点</h1>
-      <p class="lead">一台 2GB 的 Alpine、一条 Cloudflare Tunnel、一个 EdgeOne 双栈入口，以及一个总在凌晨检查日志的人。</p>
+      <p class="lead">个人实在闲的无聊而诞生的,大部分都由AI实现.记录一些有趣的事情吧</p>
       <div class="meta"><span>EST. 2026</span><span>STATIC BLOG</span><span>NO TRACKING</span></div>
     </section>
 
     <div class="about-page">
       <article class="prose">
-        <h2>这是谁写的</h2>
+        <h2>这是什么东西</h2>
         <p>
-          这里是一个人的 Homelab 记录站。主业不是运维，但总忍不住把旧笔记本、域名、证书和小型服务器
-          拼在一起，看看它们能跑多远。博客里的很多东西都不是最优解，只是在我这里刚好能用的解。
+          这里是一个个人记录站。
         </p>
 
-        <h2>为什么写下来</h2>
+        <h2>存在的意义</h2>
         <p>
-          因为服务器会重启，隧道会掉线，IPv6 前缀会变。很多问题第一次解决时花了整个晚上，
-          第二次遇到时却只记得「好像改过某个配置」。写下来，是为了下一次少走一点夜路。
+          学习域名,DDNS,部署,CDN而做的,但是目前仍学的一知半解
         </p>
-        <p>如果这些记录刚好也帮到了你，那这个站点就多了一点意义。</p>
 
         <h2>站点怎么跑</h2>
         <ul>
           <li>一台 Alpine 小机器，负责 nginx 和静态文件；</li>
-          <li>EdgeOne 免费版做双栈入口，回源到 <code>origin.zycbhb.top:8443</code> 的 IPv6；</li>
-          <li>Cloudflare Tunnel 保留给旧展示页和回滚路径；</li>
-          <li>纯静态 HTML / CSS / JS，没有数据库，也没有后台；</li>
+          <li>EdgeOne 免费版做双栈入口，回源到 IPv6；</li>
+          <li>纯静态 HTML / CSS / JS，没有数据库，也没有后台；(后续会改)</li>
           <li>字体自托管，页面不加载第三方分析工具。</li>
         </ul>
         <p>
@@ -46,10 +42,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
         <h2>写什么</h2>
         <p>
-          主要写 Homelab、自托管、网络和监控：Cloudflare Tunnel、动态 IPv6、Alpine 上的服务编排、
-          Uptime Kuma、EasyTier，以及那些「本来只想改一行配置」最后变成通宵的夜晚。
+          主要写想分享的内容,但是大概率会懒到放任不管
         </p>
-        <p>偶尔也会写一点硬件和旧设备改造。毕竟很多问题的起点，是一台本来该被淘汰的机器。</p>
 
         <h2>隐私</h2>
         <p>
@@ -62,6 +56,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           站点使用 <strong>Fusion Pixel Font</strong>（缝合像素字体），以 SIL Open Font License 1.1 授权。
           字体文件与许可证随站点一起自托管，可在
           <a href="/assets/fonts/OFL.txt">assets/fonts/OFL.txt</a> 查看全文。
+        </p>
+
+        <h2>其他</h2>
+        <p>
+          联系:<a href="https://github.com/zycbhb" target="_blank">想联系就开盒我联系(不对不对)</a>
         </p>
 
         <div class="callout">
