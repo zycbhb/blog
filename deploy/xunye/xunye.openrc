@@ -1,0 +1,15 @@
+#!/sbin/openrc-run
+description="Xunye article chat"
+command="/usr/bin/python3"
+command_args="/usr/local/lib/xunye/chat.py"
+command_user="xunye:xunye"
+command_background="yes"
+pidfile="/run/xunye.pid"
+start_pre() {
+    set -a
+    . /etc/xunye.env || return 1
+    set +a
+}
+depend() {
+    need net
+}
