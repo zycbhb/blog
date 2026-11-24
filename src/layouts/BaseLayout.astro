@@ -1,6 +1,7 @@
 ﻿---
 import Topbar from "../components/Topbar.astro";
 import Footer from "../components/Footer.astro";
+import Xunye from "../components/Xunye.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -37,7 +38,7 @@ const canonical = new URL(canonicalPath, Astro.site ?? Astro.url);
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     {noindex && <meta name="robots" content="noindex" />}
-    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/assets/journal-mark.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" type="application/rss+xml" title="监视者日志" href="/rss.xml" />
     <meta property="og:type" content={ogType} />
@@ -47,14 +48,17 @@ const canonical = new URL(canonicalPath, Astro.site ?? Astro.url);
     <title>{title}</title>
   </head>
   <body>
-    <canvas id="rain" aria-hidden="true"></canvas>
-    <div class="scanlines" aria-hidden="true"></div>
+    <div class="scenery" aria-hidden="true"></div>
+
+
     {showProgress && <div class="progress" id="progress"></div>}
     <Topbar active={active} status={status} />
     <slot />
     <Footer right={footerRight} />
+    <Xunye />
     <script>
       import "../scripts/main.js";
+      import "../scripts/scenery.js";
     </script>
   </body>
 </html>

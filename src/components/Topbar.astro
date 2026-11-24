@@ -4,21 +4,21 @@ interface Props {
   status?: string;
 }
 
-const { active = "home", status = "LINK STABLE" } = Astro.props;
+const { active = "home" } = Astro.props;
 const nav = [
-  { key: "home", href: "/", label: "/ 首页" },
-  { key: "archive", href: "/archive.html", label: "/ 归档" },
-  { key: "tags", href: "/tags.html", label: "/ 标签" },
-  { key: "about", href: "/about.html", label: "/ 关于" },
+  { key: "home", href: "/", label: "首页" },
+  { key: "archive", href: "/archive.html", label: "归档" },
+  { key: "tags", href: "/tags.html", label: "标签" },
+  { key: "about", href: "/about.html", label: "关于" },
 ] as const;
 ---
 
 <header class="topbar">
-  <a class="brand" href="/"><span class="eye-mini" aria-hidden="true"></span>OVERSEER<span class="dim">.LOG</span></a>
+  <a class="brand" href="/"><img src="/assets/journal-mark.svg" width="30" height="30" alt="" />监视者日志</a>
   <nav>
     {nav.map((item) => (
       <a href={item.href} class={active === item.key ? "on" : undefined}>{item.label}</a>
     ))}
   </nav>
-  <div class="status"><span class="dot"></span>{status}</div>
+  
 </header>

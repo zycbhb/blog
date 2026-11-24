@@ -1,0 +1,28 @@
+<button class="xy-launch" aria-haspopup="dialog" aria-controls="xy-room"><img src="/assets/xunye-face.webp" alt="" />和寻页聊聊</button>
+<dialog id="xy-room" aria-labelledby="xy-name">
+  <header class="xy-head"><div><small>窗边书桌</small><h2 id="xy-name">寻页</h2></div><button class="xy-close" aria-label="关闭对话">×</button></header>
+  <div class="xy-stage"><div class="xy-lines"></div><p>给你留了<br/>个靠窗的位置。</p><div class="xy-actor"><img data-src="/assets/xunye.webp" alt="寻页抱着日志本" /><img data-frame="blink" alt="" /><img data-frame="speak" alt="" /><img data-frame="read" alt="" /></div></div>
+  <div class="xy-log" role="log" aria-live="polite"></div>
+  <div class="xy-choices"><button data-choice="start">你在读什么？</button><button data-choice="net">随便聊聊</button></div>
+  <form class="xy-form"><input aria-label="向寻页提问" placeholder="我想说……" maxlength="450" required /><button>发送</button></form>
+</dialog>
+<script src="../scripts/xunye.js"></script>
+<style is:global>
+.xy-launch,#xy-room{color:#e9ede4;font-family:var(--body);border:1px solid #4f746d;background:#112326}
+.xy-launch{cursor:pointer;position:fixed;right:20px;bottom:20px;z-index:20;display:flex;align-items:center;gap:8px;padding:5px 14px 5px 5px;border-radius:32px;box-shadow:0 5px 20px #0007;font-weight:650}
+.xy-launch img{width:37px;height:37px;border-radius:50%;background:#344b49}
+#xy-room{position:fixed;inset:auto 16px 16px auto;margin:0;width:min(418px,calc(100vw - 24px));max-height:min(720px,calc(100dvh - 24px));padding:0;border-radius:16px;box-shadow:0 20px 75px #0009;overflow:auto;color-scheme:dark}
+#xy-room[open]{display:flex;flex-direction:column}
+#xy-room::backdrop{background:#04101455}
+.xy-head,.xy-form,.xy-choices{display:flex;align-items:center;gap:8px;padding:12px 16px}
+.xy-head{justify-content:space-between}.xy-head small{color:#b4c4b9;font-size:11px;letter-spacing:2px}.xy-head h2{font:600 24px/1.3 var(--body);margin:2px 0 0;color:#f4ebd5}
+#xy-room button{font-family:inherit;cursor:pointer}.xy-close{background:none;color:#d5e3db;border:0;font-size:27px;padding:0 6px}
+.xy-stage{height:clamp(100px,23dvh,185px);flex:none;background:linear-gradient(115deg,#294441,#172d30 70%,#425044);position:relative;overflow:hidden}
+.xy-stage img{position:absolute;right:6px;width:53%;top:-5px}.xy-stage p{position:relative;margin:0;padding:23px;font:500 clamp(19px,3vh,26px)/1.55 Georgia,serif;color:#f0dfb9;letter-spacing:2px}.xy-lines{position:absolute;inset:0;opacity:.25;background:repeating-linear-gradient(130deg,transparent 0 30px,#829689 31px,transparent 32px)}
+.xy-log{padding:16px;overflow:auto;min-height:82px;max-height:245px;font-size:14px;line-height:1.65}.xy-log p{margin:0 0 8px;white-space:pre-wrap}.xy-log .xy-user{color:#8ce6d7;text-align:right;margin-top:10px}
+.xy-log a{display:block;color:#f1cb92;text-decoration:underline;text-underline-offset:3px;margin:4px 0}
+.xy-choices{flex-wrap:wrap;padding-block:4px}.xy-choices>*{font:12px var(--body);padding:5px 9px;background:#1e3536;color:#c5e4da;border:1px solid #436460;border-radius:20px;text-decoration:none}
+.xy-form input{min-width:0;flex:1;padding:9px;border:1px solid #47635e;background:#0e1e20;color:white;border-radius:6px}.xy-form button{padding:9px 13px;border:0;background:#e8cda3;color:#172b2b;border-radius:6px}
+@media(max-width:520px){#xy-room{right:12px;bottom:max(12px,env(safe-area-inset-bottom))}.xy-launch{bottom:12px;right:12px}}
+.xy-launch,#xy-room{color:#344438;background:#fffdf6;border-color:#cdd6c4;color-scheme:light}.xy-launch{box-shadow:0 3px 16px #363c301a}.xy-launch img{background:#e7ebde}.xy-head h2{color:#2e4539}.xy-head small,.xy-close{color:#647559}.xy-stage{background:linear-gradient(110deg,#f4ead4,#e3eddc)}.xy-stage p{color:#586943}.xy-lines{background:repeating-linear-gradient(0deg,transparent 0 25px,#bbae91 26px,transparent 27px)}.xy-log a{color:#50704a}.xy-log .xy-user{color:#8b4d35}.xy-choices>*{background:#f3f4e8;color:#4e6449;border-color:#cbd2bd}.xy-form input{background:#fffefa;border-color:#bdc9b5;color:#273c32}.xy-form button{background:#4b6d52;color:white}#xy-room::backdrop{background:#4c554a33}
+</style>
